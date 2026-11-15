@@ -1,27 +1,27 @@
 // Sztukfilm – działanie bez internetu.
 // Po każdej zmianie plików zwiększ numer wersji, żeby telefony pobrały nową wersję.
-const VERSION = "sztukfilm-v2";
+const VERSION = "sztukfilm-v3";
 const FILES = [
   "./",
   "index.html",
   "polityka.html",
   "manifest.webmanifest",
   "filmy.json",
-  "icons/icon-192.png",
-  "icons/icon-512.png",
-  "icons/icon-maskable-512.png",
-  "icons/apple-touch-icon.png",
-  "icons/favicon-32.png",
-  "fonts/inter-latin-400-normal.woff2",
-  "fonts/inter-latin-500-normal.woff2",
-  "fonts/inter-latin-600-normal.woff2",
-  "fonts/inter-latin-ext-400-normal.woff2",
-  "fonts/inter-latin-ext-500-normal.woff2",
-  "fonts/inter-latin-ext-600-normal.woff2",
-  "fonts/fraunces-latin-600-normal.woff2",
-  "fonts/fraunces-latin-800-normal.woff2",
-  "fonts/fraunces-latin-ext-600-normal.woff2",
-  "fonts/fraunces-latin-ext-800-normal.woff2"
+  "icon-192.png",
+  "icon-512.png",
+  "icon-maskable-512.png",
+  "apple-touch-icon.png",
+  "favicon-32.png",
+  "inter-latin-400-normal.woff2",
+  "inter-latin-500-normal.woff2",
+  "inter-latin-600-normal.woff2",
+  "inter-latin-ext-400-normal.woff2",
+  "inter-latin-ext-500-normal.woff2",
+  "inter-latin-ext-600-normal.woff2",
+  "fraunces-latin-600-normal.woff2",
+  "fraunces-latin-800-normal.woff2",
+  "fraunces-latin-ext-600-normal.woff2",
+  "fraunces-latin-ext-800-normal.woff2"
 ];
 
 self.addEventListener("install", e => {

@@ -15,7 +15,7 @@ Bez rejestracji i reklam. Wszystkie dane zostają na urządzeniu użytkownika �
 
 1. Rozpakuj `sztukfilm.zip`.
 2. Na GitHubie: **+** (prawy górny róg) → **New repository** → nazwa **sztukfilm** → **Public** → **Create repository**.
-3. Kliknij link **„uploading an existing file”** i przeciągnij **całą zawartość** folderu `sztukfilm` (razem z folderami `fonts` i `icons`) → **Commit changes**.
+3. Kliknij link **„uploading an existing file”** i przeciągnij **wszystkie pliki** z folderu `sztukfilm` (zaznacz je Ctrl+A) → **Commit changes**. Wszystkie pliki leżą w jednym miejscu – bez podfolderów.
 4. **Settings** → **Pages** → Branch: **main**, folder **/(root)** → **Save**.
 5. Po 1–2 minutach odśwież stronę – pojawi się adres `https://TWOJ-LOGIN.github.io/sztukfilm/`.
 
