@@ -1,0 +1,18 @@
+{
+  "name": "Sztukfilm – sztuka o filmie",
+  "short_name": "Sztukfilm",
+  "description": "Dobiera filmy do Twojej osobowości i nastroju. Kalendarz seansów i wspólny wybór filmu we dwoje.",
+  "lang": "pl",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#14111c",
+  "theme_color": "#14111c",
+  "categories": ["entertainment", "lifestyle"],
+  "icons": [
+    { "src": "icons/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "icons/icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}

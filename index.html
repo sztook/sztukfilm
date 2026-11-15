@@ -1,0 +1,850 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#14111c">
+<title>Sztukfilm – sztuka o filmie</title>
+<meta name="description" content="Sztukfilm – darmowa aplikacja, która dobiera filmy do Twojej osobowości i nastroju. Bez rejestracji, dane zostają na Twoim telefonie.">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32.png">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Sztukfilm">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<style>
+@font-face{font-family:Inter;font-style:normal;font-weight:400;font-display:swap;src:url(fonts/inter-latin-400-normal.woff2) format('woff2');unicode-range:U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD}
+@font-face{font-family:Inter;font-style:normal;font-weight:400;font-display:swap;src:url(fonts/inter-latin-ext-400-normal.woff2) format('woff2');unicode-range:U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF}
+@font-face{font-family:Inter;font-style:normal;font-weight:500;font-display:swap;src:url(fonts/inter-latin-500-normal.woff2) format('woff2');unicode-range:U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD}
+@font-face{font-family:Inter;font-style:normal;font-weight:500;font-display:swap;src:url(fonts/inter-latin-ext-500-normal.woff2) format('woff2');unicode-range:U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF}
+@font-face{font-family:Inter;font-style:normal;font-weight:600;font-display:swap;src:url(fonts/inter-latin-600-normal.woff2) format('woff2');unicode-range:U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD}
+@font-face{font-family:Inter;font-style:normal;font-weight:600;font-display:swap;src:url(fonts/inter-latin-ext-600-normal.woff2) format('woff2');unicode-range:U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF}
+@font-face{font-family:Fraunces;font-style:normal;font-weight:600;font-display:swap;src:url(fonts/fraunces-latin-600-normal.woff2) format('woff2');unicode-range:U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD}
+@font-face{font-family:Fraunces;font-style:normal;font-weight:600;font-display:swap;src:url(fonts/fraunces-latin-ext-600-normal.woff2) format('woff2');unicode-range:U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF}
+@font-face{font-family:Fraunces;font-style:normal;font-weight:800;font-display:swap;src:url(fonts/fraunces-latin-800-normal.woff2) format('woff2');unicode-range:U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD}
+@font-face{font-family:Fraunces;font-style:normal;font-weight:800;font-display:swap;src:url(fonts/fraunces-latin-ext-800-normal.woff2) format('woff2');unicode-range:U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF}
+:root{
+  --bg:#14111c; --card:#1e1a29; --card2:#272236; --line:#342d47;
+  --tx:#f1ecf8; --mut:#a59cb8; --acc:#ffb547; --acc2:#ff6b6b; --ok:#5ed6a0;
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;background:var(--bg);color:var(--tx);font-family:Inter,system-ui,sans-serif;font-size:15px}
+body{padding-bottom:calc(76px + env(safe-area-inset-bottom))}
+header{padding:calc(14px + env(safe-area-inset-top)) 18px 10px;position:sticky;top:0;background:linear-gradient(var(--bg) 80%,transparent);z-index:5}
+h1{font-family:Fraunces,serif;font-weight:800;font-size:24px;margin:0;letter-spacing:-.3px}
+h1 span{color:var(--acc)}
+.tag{font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--mut);margin-top:1px}
+footer{text-align:center;color:var(--mut);font-size:12px;line-height:1.6;padding:18px 0 8px}
+footer a{color:var(--mut)}
+h2{font-family:Fraunces,serif;font-weight:600;font-size:21px;margin:6px 0 4px}
+.sub{color:var(--mut);font-size:13.5px;line-height:1.45;margin:0 0 14px}
+main{max-width:560px;margin:0 auto;padding:0 16px}
+.view{display:none}.view.on{display:block;animation:fade .25s}
+@keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1}}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px;margin-bottom:12px}
+nav{position:fixed;left:0;right:0;bottom:0;background:#191522f2;backdrop-filter:blur(10px);border-top:1px solid var(--line);display:flex;padding:6px 6px calc(6px + env(safe-area-inset-bottom));z-index:10}
+nav button{flex:1;background:none;border:0;color:var(--mut);font:500 11.5px Inter;display:flex;flex-direction:column;align-items:center;gap:3px;padding:6px 0;border-radius:12px}
+nav button svg{width:23px;height:23px}
+nav button.on{color:var(--acc)}
+.btn{background:var(--acc);color:#241a05;border:0;border-radius:12px;padding:13px 18px;font:600 15px Inter;width:100%}
+.btn.ghost{background:var(--card2);color:var(--tx)}
+.btn:disabled{opacity:.4}
+/* quiz */
+.q{font-size:16px;line-height:1.4;margin:4px 0 14px;min-height:46px}
+.q b{color:var(--acc)}
+.scale{display:grid;grid-template-columns:repeat(7,1fr);gap:6px}
+.scale button{aspect-ratio:1;border-radius:50%;border:2px solid var(--line);background:var(--card2);color:var(--tx);font:600 15px Inter}
+.scale button.sel{background:var(--acc);border-color:var(--acc);color:#241a05}
+.scale-lbl{display:flex;justify-content:space-between;color:var(--mut);font-size:11.5px;margin-top:8px}
+.prog{height:5px;background:var(--card2);border-radius:5px;overflow:hidden;margin-bottom:14px}
+.prog i{display:block;height:100%;background:var(--acc);transition:width .3s}
+.row{display:flex;gap:10px;margin-top:16px}
+/* traits */
+.trait{margin:12px 0}
+.trait .top{display:flex;justify-content:space-between;font-size:14px;margin-bottom:5px}
+.trait .top span:last-child{color:var(--mut)}
+.bar{height:9px;background:var(--card2);border-radius:9px;overflow:hidden}
+.bar i{display:block;height:100%;border-radius:9px;background:linear-gradient(90deg,var(--acc2),var(--acc))}
+.trait p{color:var(--mut);font-size:12.5px;margin:5px 0 0;line-height:1.4}
+.arche{font-family:Fraunces,serif;font-size:26px;font-weight:800;color:var(--acc);margin:2px 0 6px}
+.note{font-size:11.5px;color:var(--mut);line-height:1.4}
+/* movies */
+.search{width:100%;background:var(--card);border:1px solid var(--line);color:var(--tx);border-radius:12px;padding:12px 14px;font:15px Inter;margin-bottom:10px}
+.chips{display:flex;gap:7px;overflow-x:auto;padding-bottom:6px;margin-bottom:6px;scrollbar-width:none}
+.chips::-webkit-scrollbar{display:none}
+.chip{flex:none;background:var(--card);border:1px solid var(--line);color:var(--tx);border-radius:20px;padding:7px 13px;font:500 13px Inter}
+.chip.on{background:var(--acc);color:#241a05;border-color:var(--acc)}
+.mv{display:flex;gap:12px;align-items:center;padding:10px 0;border-bottom:1px solid var(--line)}
+.poster{flex:none;width:46px;height:64px;border-radius:8px;display:flex;align-items:center;justify-content:center;font:800 16px Fraunces,serif;color:#fff9;text-shadow:0 1px 2px #0005}
+.mv .info{flex:1;min-width:0}
+.mv .t{font-weight:600;font-size:14.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.mv .m{color:var(--mut);font-size:12px;margin-top:2px}
+.stars{display:flex;gap:1px;margin-top:4px}
+.stars button{background:none;border:0;padding:2px;font-size:22px;line-height:1;color:#3d3552}
+.stars button.on{color:var(--acc)}
+.count{color:var(--mut);font-size:13px;margin:4px 0 8px}
+/* recs */
+.rec{display:flex;gap:13px;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:13px;margin-bottom:10px}
+.rec .poster{width:62px;height:88px;font-size:20px}
+.rec .t{font-weight:600;font-size:15.5px}
+.match{display:inline-block;background:#ffb5471f;color:var(--acc);font-weight:600;font-size:12px;border-radius:7px;padding:3px 7px;margin:5px 0}
+.why{color:var(--mut);font-size:12.5px;line-height:1.4}
+.acts{display:flex;gap:6px;margin-top:8px;flex-wrap:wrap}
+.acts button{background:var(--card2);border:1px solid var(--line);color:var(--tx);border-radius:9px;padding:6px 10px;font:500 12.5px Inter}
+.empty{text-align:center;color:var(--mut);padding:30px 10px;line-height:1.5}
+.sheet{position:fixed;inset:0;background:#000a;display:none;align-items:flex-end;justify-content:center;z-index:20}
+.sheet.on{display:flex}
+.sheet .in{background:var(--card);border-radius:20px 20px 0 0;padding:20px 18px calc(20px + env(safe-area-inset-bottom));width:100%;max-width:560px}
+.sheet .stars{justify-content:center;margin:14px 0}
+.sheet .stars button{font-size:38px}
+/* kalendarz */
+.cal-h{display:flex;align-items:center;justify-content:space-between;gap:8px}
+.cal-h h2{margin:0;font-size:18px;text-transform:capitalize}
+.cal-h button{background:var(--card2);border:0;color:var(--tx);width:38px;height:38px;border-radius:10px;font-size:18px}
+.cal-g{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;margin-top:12px}
+.cal-g .wd{text-align:center;color:var(--mut);font-size:11px;padding:2px 0 4px}
+.cal-g .d{aspect-ratio:1;border-radius:10px;background:var(--card2);border:1.5px solid transparent;color:var(--tx);font:500 13px Inter;position:relative;padding:0}
+.cal-g .d.has{background:#ffb5472e;color:var(--acc);font-weight:700}
+.cal-g .d.has::after{content:"";position:absolute;left:50%;bottom:5px;transform:translateX(-50%);width:5px;height:5px;border-radius:50%;background:var(--acc)}
+.cal-g .d.multi::after{width:13px;border-radius:3px}
+.cal-g .d.today{border-color:var(--mut)}
+.cal-g .d.sel{border-color:var(--acc);background:var(--acc);color:#241a05}
+.cal-g .d.sel::after{background:#241a05}
+.cal-g .d.out{visibility:hidden}
+.daylist{margin-top:14px;border-top:1px solid var(--line);padding-top:12px}
+.daylist .mv{padding:8px 0}
+.daylist .poster{width:36px;height:50px;font-size:13px}
+.x{background:none;border:0;color:var(--mut);font-size:20px;padding:6px 8px}
+.logbtn{flex:none;background:var(--card2);border:1px solid var(--line);color:var(--tx);border-radius:10px;padding:8px 10px;font-size:15px}
+.field{width:100%;background:var(--card2);border:1px solid var(--line);color:var(--tx);border-radius:12px;padding:12px 14px;font:15px Inter;margin:6px 0 4px;color-scheme:dark}
+.pick{max-height:45vh;overflow-y:auto;margin-top:6px}
+.pick .mv{cursor:pointer}
+.lbl{font-size:12.5px;color:var(--mut);margin-top:10px}
+/* razem */
+.duo-who{display:flex;align-items:center;gap:12px}
+.av{width:42px;height:42px;border-radius:50%;display:flex;align-items:center;justify-content:center;font:700 17px Fraunces,serif;background:linear-gradient(140deg,var(--acc2),var(--acc));color:#241a05;flex:none}
+.av.b{background:linear-gradient(140deg,#7b6cff,#5ed6a0)}
+.opt{display:block;width:100%;text-align:left;background:var(--card2);border:1px solid var(--line);color:var(--tx);border-radius:12px;padding:13px 14px;font:500 14.5px Inter;margin-top:8px}
+.opt small{display:block;color:var(--mut);font-weight:400;margin-top:2px}
+.swipe-wrap{position:relative;height:380px;margin:6px 0 14px;touch-action:pan-y}
+.scard{position:absolute;inset:0;background:var(--card);border:1px solid var(--line);border-radius:22px;padding:18px;display:flex;flex-direction:column;align-items:center;text-align:center;transition:transform .25s,opacity .25s;user-select:none}
+.scard .poster{width:150px;height:212px;font-size:44px;border-radius:14px;margin-bottom:14px}
+.scard .t{font:700 20px Fraunces,serif;line-height:1.2}
+.scard .m{color:var(--mut);font-size:13px;margin:4px 0 8px}
+.stamp{position:absolute;top:22px;font:800 22px Inter;padding:4px 12px;border:3px solid;border-radius:10px;opacity:0;transform:rotate(-12deg)}
+.stamp.yes{left:18px;color:var(--ok)}.stamp.no{right:18px;color:var(--acc2);transform:rotate(12deg)}
+.vote{display:flex;gap:22px;justify-content:center}
+.vote button{width:68px;height:68px;border-radius:50%;border:2px solid var(--line);background:var(--card);font-size:28px}
+.vote .y{color:var(--ok);border-color:#5ed6a066}.vote .n{color:var(--acc2);border-color:#ff6b6b66}
+.turn{text-align:center;color:var(--mut);font-size:13.5px;margin-bottom:4px}
+.turn b{color:var(--tx)}
+.winner{text-align:center;background:linear-gradient(160deg,#2b2240,#1e1a29);border:1px solid var(--acc);border-radius:20px;padding:20px 16px;margin-bottom:12px}
+.winner .poster{width:120px;height:170px;font-size:36px;margin:10px auto 12px;border-radius:12px}
+.winner .t{font:800 22px Fraunces,serif}
+.pair{display:flex;gap:6px;justify-content:center;flex-wrap:wrap;margin-top:6px}
+.pair span{background:var(--card2);border-radius:7px;padding:3px 8px;font-size:12px;color:var(--mut)}
+.chips.wrap{flex-wrap:wrap;overflow:visible}
+.today{background:linear-gradient(150deg,#2a2140,#1e1a29)}
+.mq-o{display:flex;align-items:center;gap:12px}
+.mq-o .e{font-size:24px;width:30px;text-align:center}
+textarea.field{min-height:90px;resize:none;font:13px ui-monospace,monospace}
+.toast{position:fixed;left:50%;bottom:calc(90px + env(safe-area-inset-bottom));transform:translateX(-50%);background:var(--tx);color:var(--bg);padding:9px 16px;border-radius:20px;font-size:13.5px;font-weight:500;opacity:0;transition:.25s;pointer-events:none;z-index:30}
+.toast.on{opacity:1}
+</style>
+</head>
+<body>
+<header><h1>Sztuk<span>film</span></h1><div class="tag">sztuka o filmie</div></header>
+<main>
+
+<!-- PROFIL -->
+<section class="view on" id="v-profil">
+  <div id="quiz"></div>
+  <div id="result"></div>
+  <div id="cal"></div>
+  <div class="card" id="install" style="display:none"><div class="duo-who"><div style="font-size:28px">📲</div><div style="flex:1"><div style="font-weight:600">Dodaj Sztukfilm do ekranu telefonu</div><div class="note" id="insttxt"></div></div></div><button class="btn" id="instbtn" style="margin-top:12px;display:none">Zainstaluj</button></div>
+  <footer>Sztukfilm · sztuka o filmie<br>Darmowa, bez rejestracji – Twoje dane zostają na tym urządzeniu.<br><a href="polityka.html">Polityka prywatności</a></footer>
+</section>
+
+<!-- OCEŃ -->
+<section class="view" id="v-ocen">
+  <h2>Oceń obejrzane filmy</h2>
+  <p class="sub">Im więcej ocen, tym trafniejsze rekomendacje. Filmów, których nie znasz, po prostu nie oceniaj.</p>
+  <input class="search" id="q" placeholder="Szukaj filmu…" autocomplete="off">
+  <div class="chips" id="gchips"></div>
+  <div class="count" id="cnt"></div>
+  <div id="list"></div>
+</section>
+
+<!-- POLECANE -->
+<section class="view" id="v-polecane">
+  <h2>Polecane dla Ciebie</h2>
+  <p class="sub" id="recsub"></p>
+  <div id="moods"></div>
+  <div id="recs"></div>
+</section>
+
+<!-- RAZEM -->
+<section class="view" id="v-razem"><div id="duo"></div></section>
+
+</main>
+
+<nav>
+  <button data-v="profil" class="on"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 21c1-4 4-6 8-6s7 2 8 6"/></svg>Profil</button>
+  <button data-v="ocen"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3l2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1-4.4-4.3 6.1-.9z"/></svg>Oceń</button>
+  <button data-v="polecane"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M10 9l5 3-5 3z" fill="currentColor"/></svg>Polecane</button>
+  <button data-v="razem"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="8.5" cy="8" r="3.5"/><circle cx="16.5" cy="9" r="3"/><path d="M2 20c.8-3.5 3.2-5.5 6.5-5.5S14.2 16.5 15 20M15.5 14.6c3 0 5.6 1.8 6.5 5.4"/></svg>Razem</button>
+</nav>
+
+<div class="sheet" id="sheet"><div class="in" id="sheetin"></div></div>
+<div class="toast" id="toast"></div>
+
+<script>
+/* ---------- DANE ---------- */
+const GEN = {A:"Akcja",K:"Komedia",D:"Dramat",S:"Sci-fi",F:"Fantasy",H:"Horror",T:"Thriller",R:"Romans",N:"Animacja",C:"Kryminał",W:"Wojenny",B:"Biograficzny",P:"Przygodowy",M:"Muzyczny",Y:"Familijny"};
+const GK = Object.keys(GEN);
+const MOODK = ["mroczny","złożony","lekki","intensywny","wzruszający"];
+// Filmy wczytywane z pliku filmy.json (patrz loadFilms na końcu skryptu)
+const GNAME = Object.fromEntries(Object.entries(GEN).map(([k,v])=>[v.toLowerCase(),k]));
+let MOVIES = [];   // dostęp po id: MOVIES[id] (także filmy usunięte z bazy – jako „gone”)
+let ALL = [];      // aktualne filmy z bazy (do list i rekomendacji)
+function buildMovie(id,t,y,g,md,gone){
+  const f=GK.map(k=>g.includes(k)?1:0).concat(md.map(x=>x/3*0.9));
+  return {id,t,y,g,md,f,gone:!!gone};
+}
+// sprawdza plik i zwraca poprawne filmy; błędne linijki pomija
+function parseFilms(list){
+  if(!Array.isArray(list)) throw new Error("filmy.json: to nie jest lista");
+  const out=[], ids=new Set(), clamp=v=>Math.max(0,Math.min(3,Math.round(Number(v)||0)));
+  list.forEach((o,i)=>{
+    const id=Number(o&&o.id);
+    if(!o||!Number.isInteger(id)||id<0||ids.has(id)||typeof o.tytul!=="string"||!o.tytul.trim()){console.warn("Pominięto pozycję",i,o);return;}
+    const g=(Array.isArray(o.gatunki)?o.gatunki:[]).map(x=>GNAME[String(x).trim().toLowerCase()]).filter(Boolean);
+    if(!g.length){console.warn("Brak poprawnego gatunku:",o.tytul);}
+    ids.add(id);
+    out.push(buildMovie(id,o.tytul.trim(),Number(o.rok)||"",g,[o.mrok,o.zlozonosc,o.lekkosc,o.napiecie,o.wzruszenie].map(clamp)));
+  });
+  if(out.length<10) throw new Error("filmy.json: za mało poprawnych filmów");
+  return out;
+}
+function setFilms(arr){
+  MOVIES=[]; arr.forEach(m=>MOVIES[m.id]=m); ALL=arr.slice();
+  // filmy, które ktoś ocenił, a zniknęły z bazy – zostają jako „usunięte”, żeby nic się nie zepsuło
+  const refs=new Set([...Object.keys(S.rat),...S.log.map(e=>e.id),...S.watch,...S.hide,...Object.keys((S.partner&&S.partner.rat)||{})].map(Number));
+  refs.forEach(id=>{ if(!MOVIES[id]) MOVIES[id]=buildMovie(id,"(film usunięty z bazy)","",[],[0,0,0,0,0],true); });
+  S.watch=S.watch.filter(id=>!MOVIES[id].gone);
+}
+const FI = n => GK.length + MOODK.indexOf(n); // indeks cechy nastroju
+
+/* ---------- ANKIETA (TIPI – 10 pytań) ---------- */
+const QS = [
+ ["ekstrawertyczną, pełną entuzjazmu","E",0],["krytyczną, skłonną do sporów","A",1],
+ ["sumienną, zdyscyplinowaną","C",0],["niespokojną, łatwo wpadającą w zdenerwowanie","S",1],
+ ["otwartą na nowe doświadczenia, wszechstronną","O",0],["zamkniętą w sobie, cichą","E",1],
+ ["ciepłą, życzliwą wobec innych","A",0],["niezorganizowaną, beztroską","C",1],
+ ["spokojną, stabilną emocjonalnie","S",0],["konwencjonalną, mało twórczą","O",1]
+];
+const TRAITS = {
+ O:{n:"Otwartość na doświadczenia",hi:"Ciekawość, wyobraźnia, lubisz nieoczywiste historie i nowe formy.",lo:"Cenisz sprawdzone, czytelne historie i konkretną fabułę."},
+ C:{n:"Sumienność",hi:"Porządek i wytrwałość – doceniasz dopracowane, przemyślane kino.",lo:"Spontaniczność – wybierasz to, na co akurat masz ochotę."},
+ E:{n:"Ekstrawersja",hi:"Energia i towarzyskość – dobrze Ci z dynamicznym, rozrywkowym kinem.",lo:"Spokój i introspekcja – lubisz kameralne, wyciszone opowieści."},
+ A:{n:"Ugodowość",hi:"Empatia i ciepło – bliskie są Ci historie o relacjach i dobroci.",lo:"Sceptycyzm i bezpośredniość – nie boisz się mrocznych, cynicznych światów."},
+ S:{n:"Stabilność emocjonalna",hi:"Opanowanie – bez problemu wchodzisz w napięcie i trudne tematy.",lo:"Wrażliwość – mocno przeżywasz emocje bohaterów."}
+};
+// wpływ cech osobowości na preferencje (gatunki + nastroje)
+const W = {
+ O:{D:.4,S:.5,F:.3,N:.1,A:-.2,K:-.1,"złożony":.8,"lekki":-.2,"mroczny":.2},
+ C:{B:.35,W:.25,D:.2,H:-.3,"złożony":.2,"lekki":-.1},
+ E:{A:.4,K:.5,P:.4,M:.3,"lekki":.5,"intensywny":.3,"złożony":-.2,D:-.2},
+ A:{R:.5,Y:.5,N:.3,K:.2,"wzruszający":.4,"lekki":.3,"mroczny":-.6,H:-.5,C:-.2},
+ S:{H:.3,T:.25,"intensywny":.3,R:-.2,"wzruszający":-.4,"lekki":-.2}
+};
+
+/* ---------- STAN ---------- */
+const fresh=()=>({ans:Array(10).fill(0), step:0, done:false, rat:{}, hide:[], watch:[], log:[], partner:null, myName:""});
+let S = fresh();
+try{ const s=JSON.parse(localStorage.getItem("sztukfilm")); if(s) S=Object.assign(S,s);}catch(e){}
+const save=()=>{try{localStorage.setItem("sztukfilm",JSON.stringify(S))}catch(e){}};
+
+function traits(){
+  const a=S.ans, R=x=>8-x, t={};
+  t.E=(a[0]+R(a[5]))/2; t.A=(R(a[1])+a[6])/2; t.C=(a[2]+R(a[7]))/2;
+  t.S=(R(a[3])+a[8])/2; t.O=(a[4]+R(a[9]))/2; return t;
+}
+
+/* ---------- UI: PROFIL ---------- */
+const $=id=>document.getElementById(id);
+function renderQuiz(){
+  const q=$("quiz"), r=$("result");
+  if(S.done){ q.innerHTML=""; renderResult(); return; }
+  r.innerHTML="";
+  const i=S.step, it=QS[i];
+  q.innerHTML=`<h2>Krótka ankieta</h2>
+  <p class="sub">10 pytań, ok. minuty. Na ich podstawie powstanie Twój profil osobowości (model Wielkiej Piątki).</p>
+  <div class="card">
+    <div class="prog"><i style="width:${i/10*100}%"></i></div>
+    <div class="note">Pytanie ${i+1} z 10</div>
+    <div class="q">Postrzegam siebie jako osobę <b>${it[0]}</b>.</div>
+    <div class="scale">${[1,2,3,4,5,6,7].map(v=>`<button class="${S.ans[i]===v?'sel':''}" data-v="${v}">${v}</button>`).join("")}</div>
+    <div class="scale-lbl"><span>Zupełnie się nie zgadzam</span><span>Całkowicie się zgadzam</span></div>
+    <div class="row"><button class="btn ghost" id="back" ${i===0?'disabled':''}>Wstecz</button></div>
+  </div>`;
+  q.querySelectorAll(".scale button").forEach(b=>b.onclick=()=>{
+    S.ans[i]=+b.dataset.v; save();
+    setTimeout(()=>{ if(i<9){S.step++;} else {S.done=true; toast("Profil gotowy!");} save(); renderQuiz(); },160);
+  });
+  $("back").onclick=()=>{ if(S.step>0){S.step--;save();renderQuiz();} };
+}
+const ARCH = {
+ O:["Odkrywca","Szukasz w kinie nowych światów i idei, które zostają w głowie na długo."],
+ C:["Koneser","Doceniasz rzemiosło, dopracowany scenariusz i historie oparte na faktach."],
+ E:["Poszukiwacz wrażeń","Film ma dawać energię – akcja, humor i dobra zabawa w towarzystwie."],
+ A:["Empatyk","Najmocniej działają na Ciebie historie o ludziach, relacjach i dobru."],
+ S:["Twardziel","Napięcie, mrok i niepokój? Bez problemu – im mocniej, tym lepiej."],
+ N:["Wrażliwiec","Przeżywasz film całym sobą – liczy się emocja i bliskość z bohaterami."]
+};
+function renderResult(){
+  const t=traits(), ord=["O","C","E","A","S"];
+  let best="O",bv=-9; ord.forEach(k=>{const v=Math.abs(t[k]-4)+(k==="S"&&t[k]<4?0:0); if((t[k]-4)>bv){bv=t[k]-4;best=k;}});
+  if(t.S<3 && (4-t.S)>bv) best="N";
+  const nR=Object.keys(S.rat).length;
+  $("result").innerHTML=`<div class="card">
+    <div class="note">Twój filmowy archetyp</div>
+    <div class="arche">${ARCH[best][0]}</div>
+    <div class="why" style="font-size:14px">${ARCH[best][1]}</div>
+  </div>
+  ${todayCardHTML("profil")}
+  <div class="card">
+    <h2 style="font-size:18px;margin-top:0">Profil osobowości</h2>
+    ${ord.map(k=>{const v=t[k],p=(v-1)/6*100;return `<div class="trait"><div class="top"><span>${TRAITS[k].n}</span><span>${v.toFixed(1)} / 7</span></div>
+    <div class="bar"><i style="width:${p}%"></i></div><p>${v>=4?TRAITS[k].hi:TRAITS[k].lo}</p></div>`}).join("")}
+    <p class="note" style="margin-top:14px">Wynik opiera się na krótkim kwestionariuszu TIPI. To zabawa i wskazówka do doboru filmów, nie diagnoza psychologiczna.</p>
+  </div>
+  <div class="card">
+    <div class="why" style="margin-bottom:12px">Ocenione filmy: <b style="color:var(--tx)">${nR}</b>${nR<5?" – oceń jeszcze kilka, żeby rekomendacje były trafniejsze.":""}</div>
+    <button class="btn" onclick="go('${nR<5?'ocen':'polecane'}')">${nR<5?"Oceń filmy":"Zobacz rekomendacje"}</button>
+    <div class="row"><button class="btn ghost" id="redo">Wypełnij ankietę ponownie</button></div>
+    <div class="row"><button class="btn ghost" id="reset" style="color:var(--acc2)">Usuń wszystkie dane</button></div>
+  </div>`;
+  bindToday($("result"));
+  $("redo").onclick=()=>{S.done=false;S.step=0;save();renderQuiz();window.scrollTo(0,0)};
+  $("reset").onclick=()=>confirmSheet("Usunąć profil i wszystkie oceny?",()=>{S=fresh();save();renderAll();toast("Dane usunięte")});
+}
+
+/* ---------- UI: OCEŃ ---------- */
+let gsel=null;
+function poster(m,big){
+  let h=0; for(const c of m.t) h=(h*31+c.charCodeAt(0))%360;
+  const ini=m.t.replace(/[^A-Za-zĄĆĘŁŃÓŚŹŻąćęłńóśźż0-9 ]/g,"").split(" ").filter(Boolean).slice(0,2).map(w=>w[0]).join("").toUpperCase();
+  if(m.gone) return `<div class="poster" style="background:#2a2536">?</div>`;
+  return `<div class="poster" style="background:linear-gradient(150deg,hsl(${h} 55% 42%),hsl(${(h+50)%360} 60% 22%))">${ini}</div>`;
+}
+function starsHTML(id,val){return `<div class="stars" data-id="${id}">${[1,2,3,4,5].map(v=>`<button data-s="${v}" class="${val>=v?'on':''}" aria-label="${v} gwiazdek">★</button>`).join("")}</div>`}
+function bindStars(root,after){
+  root.querySelectorAll(".stars").forEach(st=>st.querySelectorAll("button").forEach(b=>b.onclick=e=>{
+    e.stopPropagation(); const id=st.dataset.id, v=+b.dataset.s;
+    if(S.rat[id]===v) delete S.rat[id]; else S.rat[id]=v;
+    S.watch=S.watch.filter(x=>x!=id); save();
+    st.querySelectorAll("button").forEach(x=>x.classList.toggle("on",(S.rat[id]||0)>=+x.dataset.s));
+    updCount(); after&&after();
+  }));
+}
+function updCount(){const n=Object.keys(S.rat).length;$("cnt").textContent=n?`Ocenione: ${n} z ${ALL.length}`:"Dotknij gwiazdek, by ocenić film. Ponowne dotknięcie usuwa ocenę."}
+function renderList(){
+  $("gchips").innerHTML=[["","Wszystkie"],["*","Ocenione"]].concat(GK.map(k=>[k,GEN[k]])).map(([k,n])=>`<button class="chip ${ (gsel||"")===k?'on':''}" data-g="${k}">${n}</button>`).join("");
+  $("gchips").querySelectorAll(".chip").forEach(c=>c.onclick=()=>{gsel=c.dataset.g||null;renderList()});
+  const q=$("q").value.trim().toLowerCase();
+  const ms=ALL.filter(m=>(!q||m.t.toLowerCase().includes(q))&&(!gsel||(gsel==="*"?S.rat[m.id]:m.g.includes(gsel))));
+  $("list").innerHTML=ms.map(m=>{const ld=lastSeen(m.id);return `<div class="mv">${poster(m)}<div class="info"><div class="t">${m.t}</div><div class="m">${m.y} · ${m.g.map(g=>GEN[g]).join(", ")}${ld?` · <span style="color:var(--acc)">obejrzany ${fmt(ld)}</span>`:""}</div>${starsHTML(m.id,S.rat[m.id]||0)}</div><button class="logbtn" data-log="${m.id}" aria-label="Zapisz seans">📅</button></div>`}).join("")||`<div class="empty">Brak filmów dla tego filtra.</div>`;
+  bindStars($("list"),()=>renderCal());updCount();
+  $("list").querySelectorAll("[data-log]").forEach(b=>b.onclick=()=>logSheet(+b.dataset.log,TODAY()));
+}
+$("q").oninput=renderList;
+
+/* ---------- SILNIK REKOMENDACJI ---------- */
+const dot=(a,b)=>a.reduce((s,x,i)=>s+x*b[i],0), nrm=a=>Math.sqrt(dot(a,a))||1;
+const cos=(a,b)=>dot(a,b)/(nrm(a)*nrm(b));
+function prefVec(){
+  const t=traits(), v=Array(GK.length+MOODK.length).fill(0), contrib={};
+  for(const k in W){
+    let z=(t[k]-4)/3; if(!S.done) z=0;
+    for(const f in W[k]){ const idx=GK.includes(f)?GK.indexOf(f):FI(f); v[idx]+=z*W[k][f]; }
+  }
+  return {v,t};
+}
+let mood=null;
+const MOODS=[["","Wszystko"],["lekki","Coś lekkiego"],["wzruszający","Na wzruszenie"],["intensywny","Trzymające w napięciu"],["złożony","Do myślenia"],["mroczny","Mroczne"]];
+function recommend(){
+  const {v:P,t}=prefVec(); const rated=Object.entries(S.rat).map(([id,r])=>({m:MOVIES[id],r}));
+  const n=rated.length, alpha=Math.min(n/8,.8);
+  const cand=ALL.filter(m=>!(m.id in S.rat)&&!S.hide.includes(m.id));
+  const out=cand.map(m=>{
+    // osobowość
+    const ps=dot(P,m.f)/nrm(m.f);
+    // podobieństwo do ocenionych
+    let num=0,den=0,bestPos=null,bp=-1;
+    rated.forEach(({m:o,r})=>{const s=cos(m.f,o.f), w=s*s; num+=w*(r-3); den+=w;
+      if(r>=4&&s*(r-3)>bp){bp=s*(r-3);bestPos={o,r,s}}});
+    const ks=den?num/den/2:0;
+    let sc=alpha*ks+(1-alpha)*ps*1.2;
+    if(mood) sc+=m.md[MOODK.indexOf(mood)]/3*.6-(m.md[MOODK.indexOf(mood)]===0?.4:0);
+    const td=todayBonus(m); sc+=td;
+    // uzasadnienie z osobowości
+    let tw=null,twv=0;
+    if(S.done) for(const k in W){let c=0;for(const f in W[k]){const idx=GK.includes(f)?GK.indexOf(f):FI(f);c+=(t[k]-4)/3*W[k][f]*m.f[idx];} if(c>twv){twv=c;tw=k}}
+    return {m,sc,bestPos,tw,tv:t[tw],td};
+  }).sort((a,b)=>b.sc-a.sc);
+  const max=out[0]?.sc||1, min=out[out.length-1]?.sc||0;
+  out.forEach(o=>o.pct=Math.round(62+36*((o.sc-min)/((max-min)||1))));
+  return {list:out.slice(0,15),n};
+}
+const TWHY={O:"Twojej otwartości na nowe doświadczenia",C:"Twojej sumienności i zamiłowania do dopracowanych historii",E:"Twojej energii i ekstrawersji",A:"Twojej empatii i ciepła",S:"Twojej odporności na napięcie"};
+function renderRecs(){
+  $("moods").innerHTML=todayCardHTML("polecane"); bindToday($("moods"));
+  if(!S.done && !Object.keys(S.rat).length){
+    $("recsub").textContent="";
+    $("recs").innerHTML=`<div class="empty">Najpierw wypełnij krótką ankietę lub oceń kilka filmów – wtedy przygotuję listę dla Ciebie.<br><br><button class="btn" style="max-width:260px" onclick="go('profil')">Wypełnij ankietę</button></div>`;return;
+  }
+  const {list,n}=recommend();
+  $("recsub").textContent = n<3?"Na razie głównie na podstawie Twojego profilu. Oceń więcej filmów, a lista się doprecyzuje.": `Na podstawie profilu i ${n} ocen${n===1?"y":""}.`;
+  const wl=S.watch.length?`<div class="card"><div class="note" style="margin-bottom:4px">Do obejrzenia</div>${S.watch.map(id=>`<div class="why" style="color:var(--tx);padding:3px 0">• ${MOVIES[id].t} (${MOVIES[id].y})</div>`).join("")}</div>`:"";
+  $("recs").innerHTML=wl+list.map(o=>{const m=o.m;let why=[];
+    if(o.td>.35) why.push("Pasuje do Twojego dzisiejszego nastroju.");
+    if(o.bestPos) why.push(`Podobny do „${o.bestPos.o.t}” (${"★".repeat(o.bestPos.r)}).`);
+    if(o.tw && S.done) why.push(`Pasuje do ${TWHY[o.tw]}.`);
+    if(!why.length) why.push("Uniwersalnie ceniony tytuł.");
+    const inW=S.watch.includes(m.id);
+    return `<div class="rec">${poster(m)}<div class="info" style="flex:1;min-width:0"><div class="t">${m.t}</div>
+    <div class="m" style="color:var(--mut);font-size:12px">${m.y} · ${m.g.map(g=>GEN[g]).join(", ")}</div>
+    <span class="match">Dopasowanie ${o.pct}%</span><div class="why">${why.join(" ")}</div>
+    <div class="acts"><button data-a="seen" data-id="${m.id}">Widziałem – oceń</button><button data-a="watch" data-id="${m.id}">${inW?"✓ Na liście":"+ Do obejrzenia"}</button><button data-a="hide" data-id="${m.id}">Nie dla mnie</button></div></div></div>`}).join("");
+  $("recs").querySelectorAll(".acts button").forEach(b=>b.onclick=()=>{
+    const id=+b.dataset.id;
+    if(b.dataset.a==="hide"){S.hide.push(id);S.watch=S.watch.filter(x=>x!==id);save();renderRecs();toast("Nie będę go polecać");}
+    if(b.dataset.a==="watch"){S.watch.includes(id)?S.watch=S.watch.filter(x=>x!==id):S.watch.push(id);save();renderRecs();}
+    if(b.dataset.a==="seen") logSheet(id,TODAY());
+  });
+}
+
+/* ---------- KALENDARZ SEANSÓW ---------- */
+const pad=n=>String(n).padStart(2,"0");
+const iso=d=>`${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}`;
+const TODAY=()=>iso(new Date());
+const fmt=s=>{const [y,m,d]=s.split("-");return `${+d}.${m}.${y}`};
+const lastSeen=id=>S.log.filter(e=>e.id===id).map(e=>e.d).sort().pop();
+const MIES=["styczeń","luty","marzec","kwiecień","maj","czerwiec","lipiec","sierpień","wrzesień","październik","listopad","grudzień"];
+const MIES_D=["stycznia","lutego","marca","kwietnia","maja","czerwca","lipca","sierpnia","września","października","listopada","grudnia"];
+let calY=new Date().getFullYear(), calMo=new Date().getMonth(), calSel=TODAY();
+function renderCal(){
+  const first=new Date(calY,calMo,1), days=new Date(calY,calMo+1,0).getDate(), off=(first.getDay()+6)%7;
+  const prefix=`${calY}-${pad(calMo+1)}-`;
+  const byDay={}; S.log.forEach(e=>{(byDay[e.d]=byDay[e.d]||[]).push(e)});
+  const inMonth=S.log.filter(e=>e.d.startsWith(prefix)).length;
+  let cells=["Pn","Wt","Śr","Cz","Pt","So","Nd"].map(w=>`<div class="wd">${w}</div>`).join("");
+  for(let i=0;i<off;i++) cells+=`<button class="d out" tabindex="-1"></button>`;
+  for(let d=1;d<=days;d++){const k=prefix+pad(d),n=(byDay[k]||[]).length;
+    cells+=`<button class="d ${n?'has':''} ${n>1?'multi':''} ${k===TODAY()?'today':''} ${k===calSel?'sel':''}" data-d="${k}">${d}</button>`;}
+  const [sy,sm,sd]=calSel.split("-").map(Number);
+  const items=(byDay[calSel]||[]);
+  $("cal").innerHTML=`<div class="card">
+    <div class="note" style="margin-bottom:8px">Kalendarz seansów · ${S.log.length} ${S.log.length===1?"seans":"seansów"} łącznie</div>
+    <div class="cal-h"><button id="cp" aria-label="Poprzedni miesiąc">‹</button><h2>${MIES[calMo]} ${calY}</h2><button id="cn2" aria-label="Następny miesiąc">›</button></div>
+    <div class="note" style="text-align:center;margin-top:4px">W tym miesiącu: ${inMonth} ${inMonth===1?"film":(inMonth>1&&inMonth<5?"filmy":"filmów")}</div>
+    <div class="cal-g">${cells}</div>
+    <div class="daylist">
+      <div style="font-weight:600;margin-bottom:4px">${sd} ${MIES_D[sm-1]} ${sy}</div>
+      ${items.length?items.map(e=>{const m=MOVIES[e.id];return `<div class="mv">${poster(m)}<div class="info"><div class="t">${m.t}</div><div class="m">${S.rat[m.id]?'<span style="color:var(--acc)">'+"★".repeat(S.rat[m.id])+'</span>':'bez oceny'}</div></div><button class="x" data-del="${S.log.indexOf(e)}" aria-label="Usuń seans">×</button></div>`}).join(""):`<div class="note" style="padding:4px 0 6px">Brak zapisanych seansów tego dnia.</div>`}
+      <button class="btn ghost" id="addday" style="margin-top:10px">+ Dodaj obejrzany film</button>
+    </div></div>`;
+  $("cp").onclick=()=>{calMo--;if(calMo<0){calMo=11;calY--}renderCal()};
+  $("cn2").onclick=()=>{calMo++;if(calMo>11){calMo=0;calY++}renderCal()};
+  $("cal").querySelectorAll(".d[data-d]").forEach(b=>b.onclick=()=>{calSel=b.dataset.d;renderCal()});
+  $("cal").querySelectorAll("[data-del]").forEach(b=>b.onclick=()=>{S.log.splice(+b.dataset.del,1);save();renderCal();renderList();toast("Seans usunięty")});
+  $("addday").onclick=()=>logSheet(null,calSel);
+}
+function logSheet(id,date){
+  const close=()=>$("sheet").classList.remove("on");
+  $("sheet").classList.add("on");
+  if(id===null){ // wybór filmu
+    $("sheetin").innerHTML=`<h2>Jaki film obejrzałaś/eś?</h2><input class="field" id="ps" placeholder="Szukaj tytułu…" autocomplete="off"><div class="pick" id="pl"></div><button class="btn ghost" id="sc" style="margin-top:10px">Anuluj</button>`;
+    const draw=()=>{const q=$("ps").value.trim().toLowerCase();
+      $("pl").innerHTML=ALL.filter(m=>!q||m.t.toLowerCase().includes(q)).slice(0,30).map(m=>`<div class="mv" data-p="${m.id}">${poster(m)}<div class="info"><div class="t">${m.t}</div><div class="m">${m.y}</div></div></div>`).join("")||`<div class="note">Nie ma takiego filmu w bazie.</div>`;
+      $("pl").querySelectorAll("[data-p]").forEach(r=>r.onclick=()=>logSheet(+r.dataset.p,date));};
+    $("ps").oninput=draw; draw(); $("sc").onclick=close; return;
+  }
+  const m=MOVIES[id]; let val=S.rat[id]||0;
+  $("sheetin").innerHTML=`<div class="note">Zapisz seans</div><h2>${m.t}</h2>
+    <div class="lbl">Kiedy obejrzany?</div><input type="date" class="field" id="ld" value="${date}" max="${TODAY()}">
+    <div class="lbl">Twoja ocena</div><div style="text-align:center">${starsHTML("tmp",val)}</div>
+    <div class="row"><button class="btn ghost" id="sc">Anuluj</button><button class="btn" id="sv">Zapisz</button></div>`;
+  const st=$("sheetin").querySelector(".stars");
+  st.querySelectorAll("button").forEach(b=>b.onclick=()=>{const v=+b.dataset.s;val=(val===v?0:v);
+    st.querySelectorAll("button").forEach(x=>x.classList.toggle("on",val>=+x.dataset.s))});
+  $("sc").onclick=close;
+  $("sv").onclick=()=>{
+    const d=$("ld").value; if(!d){toast("Wybierz datę");return}
+    if(!S.log.some(e=>e.id===id&&e.d===d)) S.log.push({id,d});
+    if(val) S.rat[id]=val; else delete S.rat[id];
+    S.watch=S.watch.filter(x=>x!==id); save(); close();
+    const [y,mo]=d.split("-").map(Number); calY=y; calMo=mo-1; calSel=d;
+    renderCal(); renderList(); renderRecs(); toast(`Zapisano seans: ${fmt(d)}`);
+  };
+}
+function confirmSheet(msg,fn){
+  $("sheetin").innerHTML=`<h2 style="text-align:center">${msg}</h2><div class="row"><button class="btn ghost" id="cn">Anuluj</button><button class="btn" id="cy" style="background:var(--acc2);color:#fff">Usuń</button></div>`;
+  $("sheet").classList.add("on");$("cn").onclick=()=>$("sheet").classList.remove("on");
+  $("cy").onclick=()=>{$("sheet").classList.remove("on");fn()};
+}
+$("sheet").onclick=e=>{if(e.target.id==="sheet")$("sheet").classList.remove("on")};
+let tt;function toast(t){const el=$("toast");el.textContent=t;el.classList.add("on");clearTimeout(tt);tt=setTimeout(()=>el.classList.remove("on"),1800)}
+
+/* ---------- TEST NASTROJU (na dziś) ---------- */
+const MQ=[
+ {q:"Jak się dziś czujesz?",o:[
+  ["😄","Pełno energii",{K:.2,A:.2,"lekki":.2,"intensywny":.2}],
+  ["😌","Spokój i relaks",{D:.1,R:.1,"złożony":.1}],
+  ["😴","Zmęczenie",{"lekki":.5,"złożony":-.5,"intensywny":-.2}],
+  ["😔","Smutek, przygnębienie",{"lekki":.3,"wzruszający":.3,"mroczny":-.4,Y:.2}],
+  ["😤","Stres, napięcie",{"lekki":.4,"mroczny":-.4,"intensywny":-.3,H:-.5,K:.3}]]},
+ {q:"Czego potrzebujesz od filmu?",o:[
+  ["😂","Pośmiać się",{K:1,"lekki":.6}],
+  ["🥲","Wzruszyć się",{"wzruszający":1,D:.4,R:.3}],
+  ["⚡","Adrenaliny i napięcia",{"intensywny":1,A:.6,T:.6}],
+  ["🧠","Czegoś do przemyślenia",{"złożony":1,D:.3,S:.3}],
+  ["🪐","Przenieść się do innego świata",{F:.8,S:.5,P:.6,N:.3}],
+  ["👻","Porządnie się bać",{H:1.2,T:.4,"mroczny":.4}]]},
+ {q:"Ile masz siły na skupienie?",o:[
+  ["🛋️","Mało – coś lekkiego, bez myślenia",{"złożony":-.8,"lekki":.4}],
+  ["🙂","Średnio – mogę się skupić",{}],
+  ["🎯","Dużo – chcę wyzwania",{"złożony":.6,D:.2}]]},
+ {q:"Jaki klimat Ci dziś pasuje?",o:[
+  ["☀️","Jasny i ciepły",{"mroczny":-.8,"lekki":.3}],
+  ["🤷","Bez znaczenia",{}],
+  ["🌑","Mroczny i ciężki",{"mroczny":.8,"lekki":-.3}]]},
+ {q:"Z kim oglądasz?",o:[
+  ["🙋","W pojedynkę",{}],
+  ["💑","We dwoje",{R:.3}],
+  ["🍕","Ze znajomymi",{K:.3,A:.3,H:.1,"wzruszający":-.2}],
+  ["👨‍👩‍👧","Z rodziną / dziećmi",{Y:1,N:.6,H:-1.5,"mroczny":-1}]]}
+];
+const todayOK=()=>S.today&&S.today.d===TODAY();
+function todayVec(){
+  const v=Array(GK.length+MOODK.length).fill(0);
+  S.today.a.forEach((ai,qi)=>{if(ai==null)return;const w=MQ[qi].o[ai][2];for(const f in w){const idx=GK.includes(f)?GK.indexOf(f):FI(f);v[idx]+=w[f];}});
+  (S.today.g||[]).forEach(g=>v[GK.indexOf(g)]+=.8);
+  return v;
+}
+let _tv=null,_tk="";
+function todayBonus(m){
+  if(!todayOK()) return 0;
+  const k=JSON.stringify(S.today); if(k!==_tk){_tv=todayVec();_tk=k;}
+  let b=nrm(_tv)>0.01?cos(_tv,m.f)*.9:0;
+  if(S.today.a[4]===3&&(m.g.includes("H")||m.md[0]>=3)) b-=2; // z dziećmi – bez horrorów i bardzo mrocznych
+  return b;
+}
+function todayLabel(){
+  const a=S.today.a, parts=[];
+  if(a[0]!=null) parts.push(MQ[0].o[a[0]][0]+" "+MQ[0].o[a[0]][1]);
+  if(a[1]!=null) parts.push(MQ[1].o[a[1]][1]);
+  if(a[2]!=null&&a[2]!==1) parts.push(a[2]===0?"coś lekkiego":"coś wymagającego");
+  if(a[3]!=null&&a[3]!==1) parts.push(a[3]===0?"jasny klimat":"mroczny klimat");
+  if(a[4]!=null&&a[4]>0) parts.push(MQ[4].o[a[4]][1].toLowerCase());
+  if((S.today.g||[]).length) parts.push(S.today.g.map(g=>GEN[g]).join(", "));
+  return parts.join(" · ");
+}
+// ctx: "profil" albo "polecane"
+function todayCardHTML(ctx){
+  if(todayOK()) return `<div class="card today"><div class="note">Nastrój na dziś</div><div style="font-weight:600;margin:5px 0 4px;line-height:1.4">${todayLabel()}</div>
+    <div class="note">Rekomendacje są dziś do niego dopasowane.</div><div class="acts"><button data-mq>Zmień</button><button data-mqx>Wyczyść</button></div></div>`;
+  if(S.moodOff) return ctx==="profil"?`<div class="card" style="padding:12px 16px"><div class="duo-who"><span style="font-size:22px">🎭</span><div class="note" style="flex:1">Test nastroju jest wyłączony</div><button class="logbtn" data-mqon style="font-size:13px">Włącz</button></div></div>`:"";
+  if(S.todaySkip===TODAY()) return `<div class="card" style="padding:12px 16px"><div class="duo-who"><span style="font-size:22px">🎭</span><div class="note" style="flex:1">Dziś bez testu nastroju</div><button class="logbtn" data-mq style="font-size:13px">Zrób jednak</button></div></div>`;
+  return `<div class="card today"><div class="duo-who"><div style="font-size:32px">🎭</div><div style="flex:1"><div style="font-weight:600">Jak się dziś czujesz? <span class="note">(opcjonalnie)</span></div>
+    <div class="note">Kilka szybkich pytań, by dopasować filmy do nastroju. Możesz pominąć – rekomendacje działają też bez tego.</div></div></div>
+    <div class="row"><button class="btn ghost" data-mqskip>Nie dziś</button><button class="btn" data-mq>Zrób test</button></div>
+    <div style="text-align:center;margin-top:8px"><button class="x" data-mqoff style="font-size:12.5px">Nie proponuj więcej</button></div></div>`;
+}
+function bindToday(root){
+  root.querySelectorAll("[data-mq]").forEach(b=>b.onclick=()=>mqSheet(0,[],[]));
+  root.querySelectorAll("[data-mqx]").forEach(b=>b.onclick=()=>{S.today=null;save();refreshToday();toast("Nastrój wyczyszczony")});
+  root.querySelectorAll("[data-mqskip]").forEach(b=>b.onclick=()=>{S.todaySkip=TODAY();save();refreshToday()});
+  root.querySelectorAll("[data-mqoff]").forEach(b=>b.onclick=()=>{S.moodOff=true;save();refreshToday();toast("Możesz go włączyć z powrotem w Profilu")});
+  root.querySelectorAll("[data-mqon]").forEach(b=>b.onclick=()=>{S.moodOff=false;S.todaySkip=null;save();refreshToday();toast("Test nastroju włączony")});
+}
+function refreshToday(){ if(S.done) renderResult(); renderRecs(); if(duo.stage==="setup") renderDuo(); }
+function mqFinish(ans,gs){
+  const a=MQ.map((_,i)=>ans[i]==null?null:ans[i]);
+  $("sheet").classList.remove("on");
+  if(a.every(x=>x==null)&&!gs.length){toast("Nic nie wybrano – rekomendacje bez nastroju");return}
+  S.today={d:TODAY(),a,g:gs};save();refreshToday();go("polecane");toast("Propozycje dopasowane do nastroju");
+}
+function mqSheet(step,ans,gs){
+  $("sheet").classList.add("on");
+  const total=MQ.length+1, prog=`<div class="prog"><i style="width:${step/total*100}%"></i></div><div class="note">Pytanie ${step+1} z ${total} · każde możesz pominąć</div>`;
+  const any=ans.some(x=>x!=null);
+  if(step<MQ.length){
+    const Q=MQ[step];
+    $("sheetin").innerHTML=`${prog}<h2>${Q.q}</h2>${Q.o.map((o,i)=>`<button class="opt mq-o" data-i="${i}" style="${ans[step]===i?'border-color:var(--acc)':''}"><span class="e">${o[0]}</span><span>${o[1]}</span></button>`).join("")}
+      <div class="row"><button class="btn ghost" id="mqb">${step?"Wstecz":"Anuluj"}</button><button class="btn ghost" id="mqs">Pomiń pytanie</button></div>
+      ${any?`<div class="row"><button class="btn ghost" id="mqe" style="color:var(--acc)">Zakończ teraz i pokaż filmy</button></div>`:""}`;
+    $("sheetin").querySelectorAll("[data-i]").forEach(b=>b.onclick=()=>{const a=ans.slice();a[step]=+b.dataset.i;mqSheet(step+1,a,gs)});
+    $("mqs").onclick=()=>{const a=ans.slice();a[step]=null;mqSheet(step+1,a,gs)};
+    $("mqb").onclick=()=>step?mqSheet(step-1,ans,gs):$("sheet").classList.remove("on");
+    if($("mqe")) $("mqe").onclick=()=>mqFinish(ans,gs);
+    return;
+  }
+  const sel=new Set(gs);
+  $("sheetin").innerHTML=`${prog}<h2>Na jakie gatunki masz ochotę?</h2><p class="sub">Opcjonalnie – możesz wybrać kilka albo pominąć.</p>
+    <div class="chips wrap">${GK.map(k=>`<button class="chip ${sel.has(k)?'on':''}" data-g="${k}">${GEN[k]}</button>`).join("")}</div>
+    <div class="row"><button class="btn ghost" id="mqb">Wstecz</button><button class="btn" id="mqok">Pokaż propozycje</button></div>`;
+  $("sheetin").querySelectorAll("[data-g]").forEach(c=>c.onclick=()=>{const g=c.dataset.g;sel.has(g)?sel.delete(g):sel.add(g);c.classList.toggle("on")});
+  $("mqb").onclick=()=>mqSheet(MQ.length-1,ans,[...sel]);
+  $("mqok").onclick=()=>mqFinish(ans,[...sel]);
+}
+
+/* ---------- RAZEM: wspólny wybór ---------- */
+const traitsOf=a=>{const R=x=>8-x;return {E:(a[0]+R(a[5]))/2,A:(R(a[1])+a[6])/2,C:(a[2]+R(a[7]))/2,S:(R(a[3])+a[8])/2,O:(a[4]+R(a[9]))/2}};
+function prefOf(p){
+  const v=Array(GK.length+MOODK.length).fill(0); if(!p.done) return v;
+  const t=traitsOf(p.ans);
+  for(const k in W){const z=(t[k]-4)/3; for(const f in W[k]){const idx=GK.includes(f)?GK.indexOf(f):FI(f); v[idx]+=z*W[k][f];}}
+  return v;
+}
+// wynik dopasowania 0–1 dla każdej osoby (znormalizowany w obrębie kandydatów)
+function scoresFor(p,cands){
+  const P=prefOf(p), rated=Object.entries(p.rat||{}).map(([id,r])=>({m:MOVIES[id],r}));
+  const alpha=Math.min(rated.length/8,.8);
+  const raw=cands.map(m=>{
+    const ps=dot(P,m.f)/nrm(m.f); let num=0,den=0;
+    rated.forEach(({m:o,r})=>{const s=cos(m.f,o.f),w=s*s;num+=w*(r-3);den+=w});
+    return alpha*(den?num/den/2:0)+(1-alpha)*ps*1.2;
+  });
+  const mx=Math.max(...raw), mn=Math.min(...raw);
+  return raw.map(x=>(x-mn)/((mx-mn)||1));
+}
+const me=()=>({n:S.myName||"Ty",ans:S.ans,done:S.done,rat:S.rat});
+function jointList(exclude=[]){
+  const p=S.partner, pr=p.rat||{};
+  const cands=ALL.filter(m=>!(m.id in S.rat)&&!(m.id in pr)&&!S.hide.includes(m.id)&&!exclude.includes(m.id));
+  const a=scoresFor(me(),cands), b=scoresFor(p,cands);
+  return cands.map((m,i)=>{
+    let j=.6*Math.min(a[i],b[i])+.4*(a[i]+b[i])/2;
+    if(duo.mood){const v=m.md[MOODK.indexOf(duo.mood)]; j+=v/3*.35-(v===0?.25:0);}
+    j+=todayBonus(m)*.4;
+    return {m,a:a[i],b:b[i],j};
+  }).sort((x,y)=>y.j-x.j);
+}
+const pc=x=>Math.round(55+43*Math.max(0,Math.min(1,x)));
+const initial=n=>(n||"?").trim().charAt(0).toUpperCase();
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+
+// kody do wymiany profili
+function myCode(){
+  const r=Object.entries(S.rat).map(([id,v])=>id+":"+v).join(",");
+  const o={n:S.myName||"Znajomy",a:S.done?S.ans.join(""):"",r};
+  return "SF1-"+btoa(unescape(encodeURIComponent(JSON.stringify(o))));
+}
+function readCode(c){
+  c=c.trim(); if(!/^(SF1|FP1)-/.test(c)) throw 0;
+  const o=JSON.parse(decodeURIComponent(escape(atob(c.slice(4)))));
+  const ans=o.a?o.a.split("").map(Number):Array(10).fill(0), rat={};
+  (o.r||"").split(",").filter(Boolean).forEach(x=>{const [i,v]=x.split(":").map(Number); if(MOVIES[i]&&!MOVIES[i].gone&&v>=1&&v<=5) rat[i]=v;});
+  if(!o.a&&!Object.keys(rat).length) throw 0;
+  return {n:String(o.n||"Znajomy").slice(0,24),ans,done:!!o.a,rat,remote:true};
+}
+
+let duo={stage:"setup",mood:null,list:[],idx:0,turn:0,votes:[{},{}],skipB:false,used:[],pq:{step:-1,name:"",ans:Array(10).fill(0)}};
+const ROUND=12;
+
+function renderDuo(){
+  const el=$("duo"), p=S.partner;
+  if(duo.stage==="pquiz") return renderPQuiz();
+  if(duo.stage==="swipe") return renderSwipe();
+  if(duo.stage==="handoff") return renderHandoff();
+  if(duo.stage==="result") return renderDuoResult();
+  // SETUP
+  if(!S.done && !Object.keys(S.rat).length){
+    el.innerHTML=`<h2>Wybieramy razem</h2><div class="empty">Najpierw wypełnij swoją ankietę albo oceń kilka filmów – wtedy połączę Twój gust z gustem drugiej osoby.<br><br><button class="btn" style="max-width:260px" onclick="go('profil')">Wypełnij ankietę</button></div>`;return;
+  }
+  let html=`<h2>Wybieramy razem</h2><p class="sub">Łączę Wasze profile i szukam filmu, który spodoba się obojgu. Potem każde z Was głosuje – wygrywa wspólne „tak”.</p>
+  <div class="card"><div class="lbl" style="margin-top:0">Twoje imię</div><input class="field" id="myn" maxlength="24" placeholder="np. Kasia" value="${esc(S.myName||"")}"></div>
+  <div class="card"><div class="note" style="margin-bottom:6px">Z kim oglądasz?</div>`;
+  if(p){
+    html+=`<div class="duo-who"><div class="av b">${initial(p.n)}</div><div style="flex:1"><div style="font-weight:600">${esc(p.n)}</div><div class="note">${p.done?"profil osobowości ✓":"bez ankiety"} · ${Object.keys(p.rat).length} ocen${p.remote?" · z kodu":""}</div></div><button class="x" id="prm" aria-label="Usuń osobę">×</button></div>`;
+  } else {
+    html+=`<button class="opt" id="o1">📱 Ankieta na tym telefonie<small>Druga osoba odpowiada na 10 pytań (ok. minuty)</small></button>
+    <button class="opt" id="o2">🔗 Wklej kod od znajomego<small>Jeśli ma Sztukfilm u siebie – wysyła Ci swój kod</small></button>`;
+  }
+  html+=`<button class="opt" id="o3">📤 Mój kod do wysłania<small>Wyślij go komuś, kto ma Sztukfilm, żeby dodał(a) Ciebie</small></button></div>`;
+  if(p){
+    const top=jointList().slice(0,5);
+    html+=`<div class="chips">${MOODS.map(([k,n])=>`<button class="chip ${(duo.mood||"")===k?'on':''}" data-m="${k}">${n}</button>`).join("")}</div>
+    <button class="btn" id="start">Zacznij wybieranie (${ROUND} filmów)</button>
+    <div class="card" style="margin-top:12px"><div class="note" style="margin-bottom:4px">Najlepsze dla Was obojga</div>
+    ${top.map(o=>`<div class="mv">${poster(o.m)}<div class="info"><div class="t">${o.m.t}</div><div class="m">${o.m.y} · ${o.m.g.map(g=>GEN[g]).join(", ")}</div>
+    <div class="pair" style="justify-content:flex-start"><span>${esc(S.myName||"Ty")} ${pc(o.a)}%</span><span>${esc(p.n)} ${pc(o.b)}%</span></div></div></div>`).join("")}</div>`;
+  }
+  el.innerHTML=html;
+  $("myn").onchange=e=>{S.myName=e.target.value.trim().slice(0,24);save();renderDuo()};
+  if($("prm")) $("prm").onclick=()=>confirmSheet(`Usunąć ${esc(p.n)} z trybu Razem?`,()=>{S.partner=null;save();renderDuo()});
+  if($("o1")) $("o1").onclick=()=>{duo.pq={step:-1,name:"",ans:Array(10).fill(0)};duo.stage="pquiz";renderDuo()};
+  if($("o2")) $("o2").onclick=pasteSheet;
+  $("o3").onclick=codeSheet;
+  el.querySelectorAll(".chip").forEach(c=>c.onclick=()=>{duo.mood=c.dataset.m||null;renderDuo()});
+  if($("start")) $("start").onclick=()=>startRound([]);
+}
+function startRound(exclude){
+  duo.list=jointList(exclude).slice(0,ROUND).map(o=>o.m.id);
+  if(!duo.list.length){toast("Brak nowych filmów do pokazania");duo.stage="setup";renderDuo();return}
+  duo.idx=0;duo.turn=0;duo.votes=[{},{}];duo.skipB=false;duo.used=exclude.concat(duo.list);duo.stage="swipe";renderDuo();window.scrollTo(0,0);
+}
+function renderPQuiz(){
+  const q=duo.pq, el=$("duo");
+  if(q.step<0){
+    el.innerHTML=`<h2>Druga osoba</h2><p class="sub">Przekaż telefon osobie, z którą oglądasz.</p><div class="card"><div class="lbl" style="margin-top:0">Jak masz na imię?</div><input class="field" id="pn" maxlength="24" placeholder="np. Tomek" value="${esc(q.name)}">
+    <div class="row"><button class="btn ghost" id="pc">Anuluj</button><button class="btn" id="pgo">Dalej</button></div></div>`;
+    $("pc").onclick=()=>{duo.stage="setup";renderDuo()};
+    $("pgo").onclick=()=>{const n=$("pn").value.trim();if(!n){toast("Wpisz imię");return}q.name=n.slice(0,24);q.step=0;renderPQuiz()};
+    return;
+  }
+  const i=q.step,it=QS[i];
+  el.innerHTML=`<h2>${esc(q.name)}, kilka pytań</h2><div class="card"><div class="prog"><i style="width:${i/10*100}%"></i></div><div class="note">Pytanie ${i+1} z 10</div>
+  <div class="q">Postrzegam siebie jako osobę <b>${it[0]}</b>.</div>
+  <div class="scale">${[1,2,3,4,5,6,7].map(v=>`<button class="${q.ans[i]===v?'sel':''}" data-v="${v}">${v}</button>`).join("")}</div>
+  <div class="scale-lbl"><span>Zupełnie się nie zgadzam</span><span>Całkowicie się zgadzam</span></div>
+  <div class="row"><button class="btn ghost" id="pb">Wstecz</button></div></div>`;
+  el.querySelectorAll(".scale button").forEach(b=>b.onclick=()=>{q.ans[i]=+b.dataset.v;
+    setTimeout(()=>{ if(i<9){q.step++;renderPQuiz()} else {S.partner={n:q.name,ans:q.ans.slice(),done:true,rat:{}};save();duo.stage="setup";renderDuo();toast(`Profil: ${q.name} gotowy`)} },160)});
+  $("pb").onclick=()=>{q.step--;renderPQuiz()};
+}
+function pasteSheet(){
+  $("sheetin").innerHTML=`<h2>Wklej kod znajomego</h2><p class="sub">Kod zaczyna się od „SF1-”. Znajomy znajdzie go w zakładce Razem → „Mój kod do wysłania”.</p>
+  <textarea class="field" id="pcode" placeholder="SF1-…"></textarea><div class="row"><button class="btn ghost" id="sc">Anuluj</button><button class="btn" id="sv">Dodaj</button></div>`;
+  $("sheet").classList.add("on");$("sc").onclick=()=>$("sheet").classList.remove("on");
+  $("sv").onclick=()=>{try{S.partner=readCode($("pcode").value);save();$("sheet").classList.remove("on");renderDuo();toast(`Dodano: ${S.partner.n}`)}catch(e){toast("Ten kod nie działa – sprawdź, czy skopiowano całość")}};
+}
+function codeSheet(){
+  const c=myCode();
+  $("sheetin").innerHTML=`<h2>Twój kod</h2><p class="sub">Zawiera Twoje imię, odpowiedzi z ankiety i oceny filmów. Wyślij go tylko osobie, z którą chcesz wybierać.</p>
+  <textarea class="field" id="mc" readonly>${c}</textarea><div class="row"><button class="btn ghost" id="sc">Zamknij</button><button class="btn" id="cp2">Kopiuj</button></div>`;
+  $("sheet").classList.add("on");$("sc").onclick=()=>$("sheet").classList.remove("on");
+  $("mc").onclick=e=>e.target.select();
+  $("cp2").onclick=()=>{const done=()=>toast("Skopiowano");
+    try{navigator.clipboard.writeText(c).then(done,()=>{$("mc").select();toast("Zaznaczono – skopiuj ręcznie")})}catch(e){$("mc").select();toast("Zaznaczono – skopiuj ręcznie")}};
+}
+function renderSwipe(){
+  const el=$("duo"), names=[S.myName||"Ty",S.partner.n];
+  if(duo.idx>=duo.list.length){
+    if(duo.turn===0){duo.stage="handoff";} else {duo.stage="result";}
+    renderDuo();return;
+  }
+  const m=MOVIES[duo.list[duo.idx]];
+  el.innerHTML=`<div class="turn">Głosuje: <b>${esc(names[duo.turn])}</b> · ${duo.idx+1} / ${duo.list.length}</div>
+  <div class="prog"><i style="width:${duo.idx/duo.list.length*100}%"></i></div>
+  <div class="swipe-wrap"><div class="scard" id="sc1"><span class="stamp yes">TAK</span><span class="stamp no">NIE</span>${poster(m)}
+  <div class="t">${m.t}</div><div class="m">${m.y} · ${m.g.map(g=>GEN[g]).join(", ")}</div>
+  <div class="pair">${m.md.map((v,i)=>v>=2?`<span>${MOODK[i]}</span>`:"").join("")}</div></div></div>
+  <div class="vote"><button class="n" id="vn" aria-label="Nie">✕</button><button class="y" id="vy" aria-label="Tak">♥</button></div>
+  <p class="note" style="text-align:center;margin-top:12px">Przesuń kartę w prawo (tak) lub w lewo (nie)</p>
+  <div class="row"><button class="btn ghost" id="vq">Przerwij</button></div>`;
+  const card=$("sc1"), sy=card.querySelector(".yes"), sn=card.querySelector(".no");
+  const vote=v=>{card.style.transform=`translateX(${v?420:-420}px) rotate(${v?18:-18}deg)`;card.style.opacity=0;
+    duo.votes[duo.turn][m.id]=v;setTimeout(()=>{duo.idx++;renderSwipe()},220)};
+  $("vy").onclick=()=>vote(true);$("vn").onclick=()=>vote(false);
+  $("vq").onclick=()=>{duo.stage="setup";renderDuo()};
+  let x0=null,dx=0;
+  card.addEventListener("pointerdown",e=>{x0=e.clientX;dx=0;card.style.transition="none";card.setPointerCapture(e.pointerId)});
+  card.addEventListener("pointermove",e=>{if(x0===null)return;dx=e.clientX-x0;card.style.transform=`translateX(${dx}px) rotate(${dx/18}deg)`;
+    sy.style.opacity=Math.max(0,dx/100);sn.style.opacity=Math.max(0,-dx/100)});
+  const end=()=>{if(x0===null)return;x0=null;card.style.transition="";
+    if(Math.abs(dx)>90) vote(dx>0); else {card.style.transform="";sy.style.opacity=0;sn.style.opacity=0}};
+  card.addEventListener("pointerup",end);card.addEventListener("pointercancel",end);
+}
+function renderHandoff(){
+  const p=S.partner, my=S.myName||"Ty";
+  $("duo").innerHTML=`<div class="card" style="text-align:center;padding:28px 18px">
+    <div class="av b" style="margin:0 auto 12px;width:60px;height:60px;font-size:24px">${initial(p.n)}</div>
+    <h2>Teraz kolej: ${esc(p.n)}</h2><p class="sub">Przekaż telefon. ${esc(my)}, bez podglądania 😉</p>
+    <button class="btn" id="hgo">Jestem ${esc(p.n)} – zaczynam</button>
+    <div class="row"><button class="btn ghost" id="hskip">${esc(p.n)} nie ma obok – dobierz z profilu</button></div></div>`;
+  $("hgo").onclick=()=>{duo.turn=1;duo.idx=0;duo.stage="swipe";renderDuo();window.scrollTo(0,0)};
+  $("hskip").onclick=()=>{duo.skipB=true;duo.stage="result";renderDuo()};
+}
+function renderDuoResult(){
+  const p=S.partner, my=S.myName||"Ty", A=duo.votes[0], B=duo.votes[1];
+  const ranked=jointList(duo.used.filter(id=>!duo.list.includes(id))).filter(o=>duo.list.includes(o.m.id));
+  let matches;
+  if(duo.skipB) matches=ranked.filter(o=>A[o.m.id]).sort((x,y)=>y.b-x.b);
+  else matches=ranked.filter(o=>A[o.m.id]&&B[o.m.id]);
+  const near=duo.skipB?[]:ranked.filter(o=>(A[o.m.id]||B[o.m.id])&&!(A[o.m.id]&&B[o.m.id]));
+  let html="";
+  if(matches.length){
+    const w=matches[0];
+    html+=`<div class="winner"><div class="note">${duo.skipB?`Twój wybór, który najbardziej pasuje też do: ${esc(p.n)}`:"🎬 Wasz film na dziś"}</div>${poster(w.m)}
+    <div class="t">${w.m.t}</div><div class="m" style="color:var(--mut);font-size:13px;margin-top:4px">${w.m.y} · ${w.m.g.map(g=>GEN[g]).join(", ")}</div>
+    <div class="pair"><span>${esc(my)} ${pc(w.a)}%</span><span>${esc(p.n)} ${pc(w.b)}%</span></div>
+    <div class="row"><button class="btn" data-log2="${w.m.id}">Oglądamy! Zapisz seans</button></div>
+    <div class="row"><button class="btn ghost" data-w2="${w.m.id}">+ Do obejrzenia</button></div></div>`;
+    if(matches.length>1) html+=`<div class="card"><div class="note" style="margin-bottom:4px">${duo.skipB?"Inne Twoje „tak”":"Inne wspólne „tak”"}</div>${matches.slice(1).map(o=>rowDuo(o,p,my)).join("")}</div>`;
+  } else {
+    html+=`<div class="card" style="text-align:center"><h2>Brak wspólnego „tak”</h2><p class="sub" style="margin:0">${near.length?"Te filmy były najbliżej zgody – albo zagrajcie kolejną rundę.":"Nic nie przypadło do gustu – spróbujcie kolejnej rundy z nowymi tytułami."}</p></div>`;
+    if(near.length) html+=`<div class="card">${near.slice(0,4).map(o=>rowDuo(o,p,my,A[o.m.id]?my:p.n)).join("")}</div>`;
+  }
+  html+=`<button class="btn ghost" id="again">Kolejna runda – nowe filmy</button><div class="row"><button class="btn ghost" id="toset">Wróć</button></div>`;
+  $("duo").innerHTML=html;
+  $("duo").querySelectorAll("[data-log2]").forEach(b=>b.onclick=()=>logSheet(+b.dataset.log2,TODAY()));
+  $("duo").querySelectorAll("[data-w2]").forEach(b=>b.onclick=()=>{const id=+b.dataset.w2;if(!S.watch.includes(id))S.watch.push(id);save();toast("Dodano do listy „Do obejrzenia”")});
+  $("again").onclick=()=>startRound(duo.used);
+  $("toset").onclick=()=>{duo.stage="setup";renderDuo()};
+}
+function rowDuo(o,p,my,who){
+  return `<div class="mv">${poster(o.m)}<div class="info"><div class="t">${o.m.t}</div><div class="m">${o.m.y}${who?` · „tak” od: ${esc(who)}`:""}</div>
+  <div class="pair" style="justify-content:flex-start"><span>${esc(my)} ${pc(o.a)}%</span><span>${esc(p.n)} ${pc(o.b)}%</span></div></div>
+  <button class="logbtn" data-w2="${o.m.id}" aria-label="Do obejrzenia">+</button></div>`;
+}
+
+/* ---------- NAWIGACJA ---------- */
+function go(v){
+  document.querySelectorAll(".view").forEach(x=>x.classList.toggle("on",x.id==="v-"+v));
+  document.querySelectorAll("nav button").forEach(x=>x.classList.toggle("on",x.dataset.v===v));
+  if(v==="profil"){renderQuiz();renderCal();} if(v==="ocen")renderList(); if(v==="polecane")renderRecs(); if(v==="razem")renderDuo();
+  window.scrollTo(0,0);
+}
+document.querySelectorAll("nav button").forEach(b=>b.onclick=()=>go(b.dataset.v));
+function renderAll(){renderQuiz();renderCal();renderList();renderRecs();duo.stage="setup";renderDuo()}
+/* ---------- WCZYTYWANIE BAZY FILMÓW ---------- */
+async function loadFilms(){
+  let films=null;
+  try{
+    const r=await fetch("filmy.json",{cache:"no-cache"});
+    if(!r.ok) throw new Error("HTTP "+r.status);
+    const txt=await r.text();
+    films=parseFilms(JSON.parse(txt));
+    try{localStorage.setItem("sztukfilm-filmy",txt)}catch(e){}
+  }catch(e){
+    console.warn("Nie udało się wczytać filmy.json – używam ostatniej dobrej wersji.",e);
+    try{films=parseFilms(JSON.parse(localStorage.getItem("sztukfilm-filmy")))}catch(e2){films=null}
+  }
+  if(!films){
+    document.querySelector("main").innerHTML='<div class="empty" style="padding-top:60px">Nie udało się wczytać listy filmów.<br>Sprawdź połączenie z internetem i odśwież stronę.</div>';
+    return;
+  }
+  setFilms(films); renderAll();
+}
+loadFilms();
+
+/* ---------- INSTALACJA (PWA) ---------- */
+if("serviceWorker" in navigator && location.protocol==="https:"){ window.addEventListener("load",()=>navigator.serviceWorker.register("sw.js").catch(()=>{})); }
+(function(){
+  const standalone=matchMedia("(display-mode: standalone)").matches||navigator.standalone;
+  if(standalone) return;
+  const ios=/iphone|ipad|ipod/i.test(navigator.userAgent);
+  const box=$("install"), txt=$("insttxt"), btn=$("instbtn");
+  if(ios){ box.style.display="block"; txt.innerHTML="W Safari dotknij <b>Udostępnij</b> (kwadrat ze strzałką), a potem <b>„Do ekranu początkowego”</b>."; }
+  let ev=null;
+  window.addEventListener("beforeinstallprompt",e=>{e.preventDefault();ev=e;box.style.display="block";txt.textContent="Będzie działać jak zwykła aplikacja – z ikoną i bez internetu.";btn.style.display="block";});
+  btn.onclick=async()=>{ if(!ev) return; ev.prompt(); try{await ev.userChoice}catch(e){} ev=null; box.style.display="none"; };
+  window.addEventListener("appinstalled",()=>{box.style.display="none";toast("Sztukfilm zainstalowany!")});
+})();
+</script>
+</body>
+</html>
